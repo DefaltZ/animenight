@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import {
-  BrowserRouter,
+  HashRouter,
   Routes,
   Route
 } from "react-router-dom"
@@ -15,7 +15,7 @@ import Bookmarks from './pages/Bookmarks'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
@@ -23,6 +23,6 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
             <Route path="/bookmarks" element={<Bookmarks />}/>
         </Route>
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   </React.StrictMode>,
 )
