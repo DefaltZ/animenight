@@ -5,7 +5,7 @@ export function Layout() {
     return (
         <div className="">
             <Navbar />
-            <div className=" text-lg">
+            <div className="text-lg">
                 <Outlet />
             </div>
         </div>
