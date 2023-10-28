@@ -9,7 +9,7 @@ type SearchResultProps = {
 
 export default function SearchResult(props: SearchResultProps) {
     return (
-        <div className="xl:w-1/4 lg:w-1/2 md:w-full px-8 py-6 border-l-2 border-gray-800">
+        <div className="xl:w-1/4 lg:w-1/2 md:w-full px-8 py-6 border-l-2 border-gray-800 hover:bg-gray-900">
             <h2 className="text-lg sm:text-xl text-white font-medium title-font mb-2">{`${props.result.title}`}</h2>
             <Link to={`/stream/${props.result.id}/1`} reloadDocument={true} className="text-red-400 inline-flex items-center">Watch 
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">

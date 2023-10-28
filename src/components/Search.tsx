@@ -20,7 +20,9 @@ export default function Search() {
     /**
      * Fetch results from the API and set the results state
      */
-    async function fetchResults() {
+    async function fetchResults(e: any) {
+        e.preventDefault();
+
         if (results.length > 0) {
             setQuery("")
             setResults([])
@@ -58,10 +60,10 @@ export default function Search() {
             <div>
                 <div className="bg-gray-900 w-full h-screen fixed">
                     <div className="flex flex-col items-center p-4">
-                        <div className="flex flex-wrap p-10">
+                        <form className="flex flex-wrap p-10" onSubmit={fetchResults}>
                             <input type="text" className="bg-gray-800 px-12 py-3 text-white transition hover:-translate-y-1 duration-300 ease-in-out hover:scale-110" onChange={onUpdate} value={query} placeholder="Search..." />
 
-                            <button className="bg-red-500 text-white px-5 py-3 hover:bg-red-600 transition hover:-translate-y-1 duration-300 ease-in-out hover:scale-110" onClick={fetchResults}>
+                            <button className="bg-red-500 text-white px-5 py-3 hover:bg-red-600 transition hover:-translate-y-1 duration-300 ease-in-out hover:scale-110" type="submit">
                                 {
                                     results.length === 0 ? (
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
@@ -74,7 +76,7 @@ export default function Search() {
                                     )
                                 }
                             </button>
-                        </div>
+                        </form>
 
                         {
                             !loading ? (
