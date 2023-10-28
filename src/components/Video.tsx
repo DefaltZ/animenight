@@ -56,7 +56,7 @@ export default function Video(props: VideoProps) {
     <div>
       <div className="flex flex-wrap items-center justify-center pt-0 space-x-2">
         <div className="text-2xl text-red-400 bg-gray-900 w-full text-center font-bold p-4">
-          You are watching: {`${animeDetails?.title}, episode ${props.episodeNum}`}
+          You are watching: {`${animeDetails?.title || "loading..."}, episode ${props.episodeNum}`}
         </div>
         {currentServer && (
           <div className="w-full max-w-screen-lg border-4 border-gray-800 rounded-lg overflow-hidden mt-0 py-1">
