@@ -1,42 +1,42 @@
-import { useNavigate } from "react-router-dom";
-import { ANIME, IAnimeInfo, IEpisodeServer, IAnimeEpisode } from "@consumet/extensions";
-import preloaderGif from "../assets/imgs/preloader.gif";
-import { useEffect, useState } from "react";
-import AnimeDetail from "./AnimeDetail";
+import { useNavigate } from "react-router-dom"; //useNaviate hook to navigate between pages, in this codebase specifically 404 pages
+import { ANIME, IAnimeInfo, IEpisodeServer, IAnimeEpisode } from "@consumet/extensions"; //using consumet library function for anime listing
+import preloaderGif from "../assets/imgs/preloader.gif"; //GIF to use for the loading page animation
+import { useEffect, useState } from "react"; //standard statefulness import
+import AnimeDetail from "./AnimeDetail"; 
 import EpisodeSelector from "./EpisodeSelector";
 
 type VideoProps = {
-  episodeNum: string;
+  episodeNum: string; 
   animeId: string;
-};
+}; //VideoProps is a TS object type with two string properties: episodeNum and animeID
 
 export default function Video(props: VideoProps) {
-  const navigate = useNavigate();
-  const [loading, setLoading] = useState(true);
-  const [currentServer, setCurrentServer] = useState<IEpisodeServer>();
-  const [servers, setServers] = useState<IEpisodeServer[]>();
-  const [animeDetails, setAnimeDetails] = useState<IAnimeInfo>();
-  const [episodes, setEpisodes] = useState<IAnimeEpisode[]>([]);
+  const navigate = useNavigate(); 
+  const [loading, setLoading] = useState(true); //useState hook for loading page, set to (true)
+  const [currentServer, setCurrentServer] = useState<IEpisodeServer>(); //useState hook for the streaming server to be fetched the episode from, as selected by the end user
+  const [servers, setServers] = useState<IEpisodeServer[]>();  //usestate hook to set the choosen streaming server
+  const [animeDetails, setAnimeDetails] = useState<IAnimeInfo>(); //usestate hook to fetch information on the anime
+  const [episodes, setEpisodes] = useState<IAnimeEpisode[]>([]); //useState hook to fetch the episode number according to the anime choosen
 
   useEffect(() => {
-    (async () => {
-      try {
+    (async () => { //asynchronous function
+      try { 
         const source = new ANIME.Gogoanime();
-        const data = await source.fetchEpisodeServers(`${props.animeId}-episode-${props.episodeNum}`);
+        const data = await source.fetchEpisodeServers(`${props.animeId}-episode-${props.episodeNum}`); //data variable fetches available servers based on the animeID and episodeNum prop
 
         if (data.length === 0) {
           navigate("/404"); // Redirect to 404 page if the episode is not found
           return;
         }
 
-        setServers(data);
+        setServers(data); //setServers useState hook is updated to fetch data from the data array
 
-        const server = data[0];
-        setCurrentServer(server);
+        const server = data[0]; //server variable acesses index 0(the first streaming website) from data variable as it is an array
+        setCurrentServer(server); 
         setLoading(false);
 
-        const anime: IAnimeInfo = await source.fetchAnimeInfo(props.animeId);
-        setAnimeDetails(anime);
+        const anime: IAnimeInfo = await source.fetchAnimeInfo(props.animeId); //fetchAnimeInfo asynchronous function fetches info about the anime using the animeID prop
+        setAnimeDetails(anime); //update the state with the fetched anime details into the anime variable 
         setEpisodes(anime.episodes!);
       } catch (error) {
         navigate("/404"); // Redirect to 404 page if the anime is not found
@@ -44,8 +44,9 @@ export default function Video(props: VideoProps) {
     })();
   }, [props.animeId, props.episodeNum, history]);
 
+  //handle user selection of a streaming server:
   const handleServerSelection = (server: IEpisodeServer) => {
-    setCurrentServer(server);
+    setCurrentServer(server); //server choosen by the user is used to update the state of the server variable
   };
 
   return loading ? (

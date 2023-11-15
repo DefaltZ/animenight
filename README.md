@@ -13,5 +13,11 @@ Feel free to contribute as well :)
 2. Finish HOME page
 3. Split some parts of the code in components
 
+# Project installation guide:
+1. ```git clone https://github.com/AmberDevv/animenight.git```
+2. cd into the folder and type ```npm i``` into the terminal.
+3. after all the packages have finished installing, type ```npm run build``` to create a build directory of the vite project.
+4. after the build is completed, finally type ```npm run start``` to initialise the local server, visit the URL in the terminal output to visit the home page 
+
 # Join the
 **[discord server](https://discord.gg/4ExWBZREET)**
